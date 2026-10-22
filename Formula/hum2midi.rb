@@ -1,11 +1,11 @@
 class Hum2midi < Formula
   desc "Convert hummed or monophonic audio recordings to quantized MIDI"
   homepage "https://github.com/starzonmyarmz/hum2midi"
-  url "git@github.com:starzonmyarmz/hum2midi.git", tag: "v0.1.2", using: :git
+  url "git@github.com:starzonmyarmz/hum2midi.git", tag: "v0.2.0", using: :git
   license "MIT"
 
-  depends_on :macos
   depends_on "python@3.12"
+  depends_on "ffmpeg"
 
   def install
     system Formula["python@3.12"].opt_bin/"python3.12", "-m", "venv", libexec
