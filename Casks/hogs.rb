@@ -1,6 +1,6 @@
 cask "hogs" do
-  version "0.2.0"
-  sha256 "679e2698918c6ff0a5b472b9fdf872f690cf08d793eedb7a1e2c09137f5b631d"
+  version "0.3.0"
+  sha256 "4df4cd9948819f950d1695b0444b7a94859372f418f04575361df6b83e8d121f"
 
   url "https://github.com/starzonmyarmz/hogs/releases/download/v#{version}/Hogs-#{version}.zip"
   name "Hogs"
