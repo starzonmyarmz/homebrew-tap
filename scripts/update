@@ -17,12 +17,13 @@ render() {
     return 1
   fi
   version=${tag#v}
-  if ! sums=$(gh release download "$tag" -R "$owner/$repo" --pattern SHA256SUMS --output -); then
-    error "$repo $tag: no SHA256SUMS asset"
-    return 1
-  fi
   if ! out=$(gh api "repos/$owner/$repo/contents/$template" -H "Accept: application/vnd.github.raw"); then
     error "$repo: can't read $template"
+    return 1
+  fi
+  if [[ $out == *@SHA256:* ]] &&
+    ! sums=$(gh release download "$tag" -R "$owner/$repo" --pattern SHA256SUMS --output -); then
+    error "$repo $tag: no SHA256SUMS asset"
     return 1
   fi
 

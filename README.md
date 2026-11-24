@@ -33,15 +33,16 @@ hour, and whenever you start it with
 5. commits the file as `chore(<name>): update to X.Y.Z` if it changed.
 
 `@VERSION@` is replaced first, so a versioned file name works:
-`@SHA256:hogs-@VERSION@.zip@`.
+`@SHA256:hogs-@VERSION@.zip@`. A template with no `@SHA256:…@`, such as a
+formula that builds from a git tag, needs no `SHA256SUMS`.
 
 The workflow uses its own `GITHUB_TOKEN`, so projects need no token to publish
 here. A project's update fails, and leaves its file alone, when the release has
 no `SHA256SUMS`, lacks a file the template names, or the template has a
 placeholder the script doesn't know.
 
-To add a project, add a line to `projects` and give the project's release a
-`SHA256SUMS` asset.
+To add a project, add a line to `projects`. If its template has checksums,
+give the project's release a `SHA256SUMS` asset.
 
 GitHub turns off scheduled workflows after 60 days without activity in the
 repository. `/pk-release` turns it back on and starts it after each release.

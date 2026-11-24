@@ -2,3 +2,4 @@
 roxel    packaging/homebrew/rox.rb     Formula/rox.rb
 roxel    packaging/homebrew/roxel.rb   Casks/roxel.rb
 hogs     packaging/hogs.rb             Casks/hogs.rb
+hum2midi packaging/homebrew/hum2midi.rb Formula/hum2midi.rb
