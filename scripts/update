@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Render every formula and cask listed in `projects` from its project's
+# latest release, and commit each file that changed.
+set -euo pipefail
+
+owner=starzonmyarmz
+cd "$(dirname "$0")/.."
+
+error() {
+  echo "::error::$*" >&2
+}
+
+render() {
+  local repo=$1 template=$2 dest=$3 tag version sums out asset sha
+  if ! tag=$(gh release view -R "$owner/$repo" --json tagName --jq .tagName); then
+    error "$repo: no published release"
+    return 1
+  fi
+  version=${tag#v}
+  if ! sums=$(gh release download "$tag" -R "$owner/$repo" --pattern SHA256SUMS --output -); then
+    error "$repo $tag: no SHA256SUMS asset"
+    return 1
+  fi
+  if ! out=$(gh api "repos/$owner/$repo/contents/$template" -H "Accept: application/vnd.github.raw"); then
+    error "$repo: can't read $template"
+    return 1
+  fi
+
+  out=${out//@VERSION@/$version}
+  while [[ $out =~ @SHA256:([^@]+)@ ]]; do
+    asset=${BASH_REMATCH[1]}
+    sha=$(awk -v f="$asset" '$2 == f { print $1 }' <<<"$sums")
+    if [[ -z $sha ]]; then
+      error "$repo $tag: SHA256SUMS has no $asset (from $template)"
+      return 1
+    fi
+    out=${out//"@SHA256:$asset@"/$sha}
+  done
+  if [[ $out =~ @[A-Z0-9_]+@ ]]; then
+    error "$repo: $template has an unknown placeholder ${BASH_REMATCH[0]}"
+    return 1
+  fi
+
+  mkdir -p "$(dirname "$dest")"
+  printf '%s\n' "$out" >"$dest"
+  git add "$dest"
+  if git diff --cached --quiet -- "$dest"; then
+    echo "$dest is already at $version"
+  else
+    git commit -q -m "chore($(basename "$dest" .rb)): update to $version" -- "$dest"
+    echo "$dest updated to $version"
+  fi
+}
+
+status=0
+while read -r -u 3 repo template dest _; do
+  [[ -z ${repo:-} || $repo == \#* ]] && continue
+  render "$repo" "$template" "$dest" || status=1
+done 3<projects
+exit "$status"

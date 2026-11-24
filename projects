@@ -1,0 +1,4 @@
+# repo   template in the repo          file in this tap
+roxel    packaging/homebrew/rox.rb     Formula/rox.rb
+roxel    packaging/homebrew/roxel.rb   Casks/roxel.rb
+hogs     packaging/hogs.rb             Casks/hogs.rb
