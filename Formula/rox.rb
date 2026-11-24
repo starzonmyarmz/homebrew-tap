@@ -4,14 +4,14 @@ class Rox < Formula
   license "MIT"
 
   on_macos do
-    url "https://github.com/starzonmyarmz/roxel/releases/download/v1.3.2/rox-macos.zip"
-    sha256 "7d9d5d4058205e33a6951ca2554fe7a51d6016522f54411bbba3d406aa10db89"
+    url "https://github.com/starzonmyarmz/roxel/releases/download/v1.4.0/rox-macos.zip"
+    sha256 "bff6ba8d5fa065be9cbd69b54b33b8affc97f3647a916a55c26bfcc9553a2e1b"
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/starzonmyarmz/roxel/releases/download/v1.3.2/rox-linux.tar.gz"
-      sha256 "bfc42594d15ff5b90dbdc4a0fbf75eac0ebc38e67e4bfafc17ddf7e59842caad"
+      url "https://github.com/starzonmyarmz/roxel/releases/download/v1.4.0/rox-linux.tar.gz"
+      sha256 "8760be54080d4df1646f53d3c9f5e828c1eb9568366f1c1a4ac0ca0739762972"
     end
   end
 
