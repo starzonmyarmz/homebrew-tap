@@ -1,8 +1,8 @@
 cask "hogs" do
-  version "0.3.1"
-  sha256 "9f13111739dccc686ca4bc0213b56c5fe33f37b138f3c164db3fa027e54db8dc"
+  version "0.3.2"
+  sha256 "8d3f8f362882c3849303c1524d47e8293e76b588fcfd919fdb923e4eaab3bc96"
 
-  url "https://github.com/starzonmyarmz/hogs/releases/download/v#{version}/Hogs-#{version}.zip"
+  url "https://github.com/starzonmyarmz/hogs/releases/download/v#{version}/hogs-#{version}.zip"
   name "Hogs"
   desc "Menu bar app that flags processes hogging the CPU"
   homepage "https://github.com/starzonmyarmz/hogs"
