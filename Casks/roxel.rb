@@ -1,6 +1,6 @@
 cask "roxel" do
-  version "1.4.0"
-  sha256 "30b780905376661613de8ba8362ac18399fb45b7e50156b5c318812876787950"
+  version "1.5.0"
+  sha256 "6d53ffbaec2334b3e96f9c88e72547d6d069d01fbd17560c834990da814fe532"
 
   url "https://github.com/starzonmyarmz/roxel/releases/download/v#{version}/Roxel-macos.zip"
   name "Roxel"
